@@ -116,10 +116,10 @@ const app = new AppBuilder<AppRegistry>()
 
 app.addDb(
   withPostgresql((opts, config) => {
-    opts.connectionString = config.getOrThrow('DATABASE_URL')[cite: 9]
-    opts.max = config.getNumber('DB_POOL_MAX', 20)[cite: 9]
+    opts.connectionString = config.getOrThrow('DATABASE_URL')
+    opts.max = config.getNumber('DB_POOL_MAX', 20)
     opts.idleTimeoutMillis = 30000
-  })
+  }),
 )
 
 const container = await app.build()
