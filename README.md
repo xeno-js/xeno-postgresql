@@ -115,9 +115,11 @@ import type { AppRegistry } from './registry'
 const app = new AppBuilder<AppRegistry>()
 
 app.addDb(
-  withPostgresql({
-    connectionString: process.env.DATABASE_URL,
-  }),
+  withPostgresql((opts, config) => {
+    opts.connectionString = config.getOrThrow('DATABASE_URL')[cite: 9]
+    opts.max = config.getNumber('DB_POOL_MAX', 20)[cite: 9]
+    opts.idleTimeoutMillis = 30000
+  })
 )
 
 const container = await app.build()
